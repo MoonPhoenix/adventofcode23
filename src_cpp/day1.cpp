@@ -65,7 +65,7 @@ int eval_string(std::string input){
 }
 
 int main(){
-    get_input(input_vector, "./input_1.txt");
+    get_input(input_vector, "./input.txt");
     int sum = 0;
     for(int i = 0; i < input_vector.size(); i++){
         int num = eval_string(input_vector[i]);
