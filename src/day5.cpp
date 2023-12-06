@@ -189,6 +189,7 @@ class Big_Map{
             return src;
         }
         void query_dest_range(std::vector<num_range> &output, std::vector<num_range> input){
+            output.clear();
             for(num_range nm : input){
                 std::vector<num_range> per_input_vec = {};
                 for(Mapping m : mappings){
@@ -237,14 +238,18 @@ int main(){
         }
     }
     else{
-        std::vector<num_range> range_collections[c_last + 1];
-        range_collections[0] = seed_ranges;
+        std::vector<num_range> input = {};
+        std::vector<num_range> output = {};
+        input = seed_ranges;
         for(int i = 0; i < c_last; i++){
             Big_Map* bm = big_maps[i];
-            bm->query_dest_range(range_collections[i + 1], range_collections[i]);
+            bm->query_dest_range(output, input);
+            input.clear();
+            input = output;
         }
-        for(int i = 0; i < range_collections[c_last].size(); i++){
-            if(range_collections[c_last][i].start < min_loc) min_loc = range_collections[c_last][i].start;
+        input.clear();
+        for(int i = 0; i < output.size(); i++){
+            if(output[i].start < min_loc) min_loc = output[i].start;
         }
     }
     const auto end_time = std::chrono::high_resolution_clock::now();
