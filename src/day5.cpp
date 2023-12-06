@@ -244,7 +244,6 @@ int main(){
         for(int i = 0; i < c_last; i++){
             Big_Map* bm = big_maps[i];
             bm->query_dest_range(output, input);
-            input.clear();
             input = output;
         }
         input.clear();
